@@ -1,5 +1,9 @@
-// Bryn Mawr College, alinen, 2020
-//
+/*
+Jenifer Fabian Dubon
+*/ 
+
+
+
 
 #include <cmath>
 #include <string>
@@ -88,6 +92,7 @@ public:
   }
 
   void mouseMotion(int x, int y, int dx, int dy) {
+
   }
 
   void mouseDown(int button, int mods) {

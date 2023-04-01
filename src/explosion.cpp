@@ -46,10 +46,20 @@ public:
     renderer.texture("image", "explosion");
 
     // 30 fps => each frame 1/30 long, e.g. when time = 1s, we play frame 30
-    frame = 0;
-    renderer.setUniform("Frame", frame);
-    renderer.setUniform("Rows", numRows);
-    renderer.setUniform("Cols", numCols);
+    frame = elapsedTime() * fps;
+    int _frames = int(frame) % 64;
+
+    int _row= numRows - (_frames / numCols);
+    int _col= _frames % numCols;
+
+    
+    renderer.setUniform("Frame", _frames);
+    renderer.setUniform("numR", numRows);
+    renderer.setUniform("numC", numCols);
+
+    renderer.setUniform("Rows", _row);
+    renderer.setUniform("Cols", _col);
+
 
     float aspect = ((float)width()) / height();
     renderer.perspective(glm::radians(60.0f), aspect, 0.1f, 50.0f);
@@ -68,6 +78,8 @@ protected:
   int frame = 0;
   int numRows = 8;
   int numCols = 8;
+
+  int fps = 30;
 };
 
 int main(int argc, char** argv)
